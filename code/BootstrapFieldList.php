@@ -20,10 +20,6 @@ class BootstrapFieldList extends Extension {
 				continue;
 			}
 
-			if(!in_array($f->class, $inline_fields )) {
-				$f->addExtraClass('form-control');
-			}
-
 			$template = "Bootstrap{$f->class}_holder";			
 			if(SSViewer::hasTemplate($template)) {					
 				$f->setFieldHolderTemplate($template);				
