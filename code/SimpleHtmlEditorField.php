@@ -8,7 +8,7 @@
  * @package bootstrap_forms
  */
 class SimpleHtmlEditorField extends TextareaField {
-	
+
 
 	/**
 	 * @var string The default buttons to show on the editor
@@ -16,12 +16,10 @@ class SimpleHtmlEditorField extends TextareaField {
 	public static $default_buttons = "bold,italic,bullist,link,formatselect";
 
 
-
 	/**
 	 * @var string The default formats to show in the format dropdown
 	 */
 	public static $default_blockformats = "p,h3,h4";
-
 
 
 	/**
@@ -31,9 +29,8 @@ class SimpleHtmlEditorField extends TextareaField {
 	 * @return SimpleHtmlEditorField
 	 */
 	public function setButtons($buttons) {
-		return $this->setAttribute('data-buttons', $buttons);		
+		return $this->setAttribute('data-buttons', $buttons);
 	}
-	
 
 
 	/**
@@ -43,9 +40,8 @@ class SimpleHtmlEditorField extends TextareaField {
 	 * @return SimpleHtmlEditorField
 	 */
 	public function setBlockFormats($formats) {
-		return $this->setAttribute('data-blockformats', $formats);		
+		return $this->setAttribute('data-blockformats', $formats);
 	}
-
 
 
 	/**
@@ -55,9 +51,8 @@ class SimpleHtmlEditorField extends TextareaField {
 	 * @return SimpleHtmlEditorField
 	 */
 	public function setCSS($css) {
-		return $this->setAttribute('data-css', $css);		
+		return $this->setAttribute('data-css', $css);
 	}
-
 
 
 	/**
@@ -66,17 +61,18 @@ class SimpleHtmlEditorField extends TextareaField {
 	 * @param array $attributes The attributes to include on the form field
 	 * @return SimpleHtmlEditorField
 	 */
-	public function FieldHolder($attributes = array ()) {
-		Requirements::javascript(BOOTSTRAP_FORMS_DIR."/javascript/tinymce/jscripts/tiny_mce/jquery.tinymce.js");
-    	Requirements::javascript(BOOTSTRAP_FORMS_DIR."/javascript/tinymce/jscripts/tiny_mce/tiny_mce.js");		
-    	if(!$this->getAttribute('data-buttons')) {
-    		$this->setButtons(self::$default_buttons);
-    	}
-    	if(!$this->getAttribute('data-blockformats')) {
-    		$this->setBlockFormats(self::$default_blockformats);
-    	}
+	public function FieldHolder($attributes = array()) {
+		Requirements::javascript(BOOTSTRAP_FORMS_DIR . "/javascript/tinymce/jscripts/tiny_mce/jquery.tinymce.js");
+		Requirements::javascript(BOOTSTRAP_FORMS_DIR . "/javascript/tinymce/jscripts/tiny_mce/tiny_mce.js");
+		if (!$this->getAttribute('data-buttons')) {
+			$this->setButtons(self::$default_buttons);
+		}
+		if (!$this->getAttribute('data-blockformats')) {
+			$this->setBlockFormats(self::$default_blockformats);
+		}
 
 		$this->addExtraClass('wysiwyg');
+
 		return parent::FieldHolder($attributes);
 	}
 

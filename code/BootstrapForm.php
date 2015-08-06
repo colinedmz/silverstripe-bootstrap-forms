@@ -13,13 +13,10 @@
 class BootstrapForm extends Form {
 
 
-
-
 	/**
 	 * @var string The template that will render this form
 	 */
 	protected $template = "BootstrapForm";
-
 
 
 	/**
@@ -27,8 +24,6 @@ class BootstrapForm extends Form {
 	 * @see BootstrapForm::setLayout()
 	 */
 	protected $formLayout = "vertical";
-
-
 
 
 	/**
@@ -40,8 +35,6 @@ class BootstrapForm extends Form {
 	public static function set_bootstrap_included($bool = true) {
 		Config::inst()->update("BootstrapForm", "bootstrap_included", $bool);
 	}
-
-
 
 
 	/**
@@ -82,10 +75,10 @@ class BootstrapForm extends Form {
 
 	/**
 	 * Sets the desired layout of the form. Options include:
-	 *		- "vertical" (default)
-	 *		- "horizontal"
-	 *		- "inline"
-	 *		- "search"
+	 *        - "vertical" (default)
+	 *        - "horizontal"
+	 *        - "inline"
+	 *        - "search"
 	 *
 	 * @todo Add template support for "inline"
 	 * @param string $layout The desired layout to use
@@ -93,9 +86,9 @@ class BootstrapForm extends Form {
 	 */
 	public function setLayout($layout) {
 		$this->formLayout = trim(strtolower($layout));
+
 		return $this;
 	}
-
 
 
 	/**
@@ -108,7 +101,6 @@ class BootstrapForm extends Form {
 	}
 
 
-
 	/**
 	 * Includes the dependency if necessary, applies the Bootstrap templates,
 	 * and renders the form HTML output
@@ -116,23 +108,21 @@ class BootstrapForm extends Form {
 	 * @return string
 	 */
 	public function forTemplate() {
-		if(!$this->stat('bootstrap_included')) {
-			Requirements::css(BOOTSTRAP_FORMS_DIR.'/css/bootstrap.css');
+		if (!$this->stat('bootstrap_included')) {
+			Requirements::css(BOOTSTRAP_FORMS_DIR . '/css/bootstrap.css');
 		}
-		if(!$this->stat('jquery_included')) {
-			Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
+		if (!$this->stat('jquery_included')) {
+			Requirements::javascript(THIRDPARTY_DIR . "/jquery/jquery.js");
 		}
-		if(!$this->stat('bootstrap_form_included')) {
-			Requirements::javascript(BOOTSTRAP_FORMS_DIR."/javascript/bootstrap_forms.js");
+		if (!$this->stat('bootstrap_form_included')) {
+			Requirements::javascript(BOOTSTRAP_FORMS_DIR . "/javascript/bootstrap_forms.js");
 		}
 		$this->addExtraClass("form-{$this->formLayout}");
 
-		$this->applyBootstrap();		
+		$this->applyBootstrap();
 
 		return parent::forTemplate();
 	}
-
-
 
 
 }

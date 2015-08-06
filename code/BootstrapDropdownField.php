@@ -1,8 +1,6 @@
 <?php
 
-
-class BootstrapButtonGroupField extends FormField {
-
+class BootstrapDropdownField extends DropdownField {
 	protected $optionsList;
 
 	public function __construct($name, $title = NULL, $options = array(), $value = NULL) {
@@ -19,14 +17,16 @@ class BootstrapButtonGroupField extends FormField {
 		return $this;
 	}
 
-
 	public function getOptions() {
 		$options = ArrayList::create();
+		$selectedValue = $this->Value();
+
 		foreach ($this->optionsList as $val => $label) {
+			$isSelected = $selectedValue == (string) $val;
 			$options->push(ArrayData::create(array(
 				'Label' => $label,
 				'Value' => $val,
-				'Selected' => $this->Value() == $val
+				'Selected' => $isSelected
 			)));
 		}
 
@@ -37,8 +37,7 @@ class BootstrapButtonGroupField extends FormField {
 	public function Field($attributes = array()) {
 		Requirements::javascript(BOOTSTRAP_FORMS_DIR . "/javascript/bootstrap_forms.js");
 
-		return $this->renderWith('BootstrapButtonGroupField');
+		return $this->renderWith('BootstrapDropdownField');
 	}
-
 
 }
