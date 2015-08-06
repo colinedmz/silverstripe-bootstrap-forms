@@ -4,38 +4,40 @@
 class BootstrapFieldList extends Extension {
 
 
-	protected $ignores = array ();
+	protected $ignores = array();
 
 
 	public function bootstrapify() {
-		$inline_fields = Config::inst()->get('BootstrapForm','inline_fields');
+		$inline_fields = Config::inst()->get('BootstrapForm', 'inline_fields');
 
-		foreach($this->owner as $f) {
+		foreach ($this->owner as $f) {
 
 
-			if(isset($this->ignores[$f->getName()])) continue;
+			if (isset($this->ignores[$f->getName()])) {
+				continue;
+			}
 
-			if($f instanceof CompositeField) {
+			if ($f instanceof CompositeField) {
 				$f->getChildren()->bootstrapify();
 				continue;
 			}
 
-			$template = "Bootstrap{$f->class}_holder";			
-			if(SSViewer::hasTemplate($template)) {					
-				$f->setFieldHolderTemplate($template);				
+			$template = "Bootstrap{$f->class}_holder";
+			if (SSViewer::hasTemplate($template)) {
+				$f->setFieldHolderTemplate($template);
 			}
-			else {				
+			else {
 				$f->setFieldHolderTemplate("BootstrapFieldHolder");
 			}
 
-			foreach(array_reverse(ClassInfo::ancestry($f)) as $className) {						
+			foreach (array_reverse(ClassInfo::ancestry($f)) as $className) {
 				$bootstrapCandidate = "Bootstrap{$className}";
 				$nativeCandidate = $className;
-				if(SSViewer::hasTemplate($bootstrapCandidate)) {
+				if (SSViewer::hasTemplate($bootstrapCandidate)) {
 					$f->setTemplate($bootstrapCandidate);
 					break;
 				}
-				elseif(SSViewer::hasTemplate($nativeCandidate)) {
+				elseif (SSViewer::hasTemplate($nativeCandidate)) {
 					$f->setTemplate($nativeCandidate);
 					break;
 				}
@@ -44,10 +46,9 @@ class BootstrapFieldList extends Extension {
 			}
 		}
 
-		return $this->owner;		
+		return $this->owner;
 
 	}
-
 
 
 	public function bootstrapIgnore($field) {

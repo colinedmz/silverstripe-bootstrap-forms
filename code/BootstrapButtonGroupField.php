@@ -1,13 +1,11 @@
 <?php
 
 
-class BootstrapButtonGroupField extends FormField
-{
+class BootstrapButtonGroupField extends FormField {
 
 	protected $optionsList;
 
-	public function __construct($name, $title = null, $options = array (), $value = null)
-	{
+	public function __construct($name, $title = NULL, $options = array(), $value = NULL) {
 		parent::__construct($name, $title, $value);
 		$this->optionsList = $options;
 
@@ -15,37 +13,32 @@ class BootstrapButtonGroupField extends FormField
 	}
 
 
-	public function setOptions($opts)
-	{
+	public function setOptions($opts) {
 		$this->optionsList = $opts;
 
 		return $this;
 	}
 
 
-
-	public function getOptions()
-	{
+	public function getOptions() {
 		$options = ArrayList::create();
-		foreach($this->optionsList as $val => $label) {
+		foreach ($this->optionsList as $val => $label) {
 			$options->push(ArrayData::create(array(
 				'Label' => $label,
 				'Value' => $val,
 				'Selected' => $this->Value() == $val
 			)));
 		}
-		
-		return $options;		
+
+		return $options;
 	}
 
 
+	public function Field($attributes = array()) {
+		Requirements::javascript(BOOTSTRAP_FORMS_DIR . "/javascript/bootstrap_forms.js");
 
-	public function Field($attributes = array ())
-	{
-		Requirements::javascript(BOOTSTRAP_FORMS_DIR."/javascript/bootstrap_forms.js");
 		return $this->renderWith('BootstrapButtonGroupField');
 	}
-
 
 
 }

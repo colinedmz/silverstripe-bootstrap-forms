@@ -12,22 +12,24 @@ class BootstrapOptionsetField extends BootstrapFormField {
 
 	/**
 	 * An array of column_name => span_length pairs.
+	 *
 	 * @example
 	 * <code>
 	 * array (
-	 * 	'xs' => 12,
-	 * 	'sm' => 12,
-	 * 	'md' => 6,
-	 * 	'lg' => 3
+	 *    'xs' => 12,
+	 *    'sm' => 12,
+	 *    'md' => 6,
+	 *    'lg' => 3
 	 * )
 	 * </code>
 	 * @var array
 	 */
-	protected $columnCounts = array ();	
+	protected $columnCounts = array();
 
 
 	/**
 	 * Number of columns in the options layout
+	 *
 	 * @var int
 	 */
 	protected $numberOfColumns;
@@ -42,25 +44,27 @@ class BootstrapOptionsetField extends BootstrapFormField {
 	 */
 	public function setInline($bool = true) {
 		$this->owner->Inline = $bool;
+
 		return $this->owner;
 	}
 
 
 	/**
 	 * Sets the column layout for the options
+	 *
 	 * @param array $cols An array of column_name => span_length pairs
 	 * @see  $columnCounts
-	 * 
+	 *
 	 * @return   OptionsetField
 	 */
 	public function setColumns($cols) {
-		if(!is_array($cols)) {
+		if (!is_array($cols)) {
 			throw new Exception("BootstrapOptionsetField::setColumns must be passed an array.");
 		}
 
-		$allowed_keys = array('lg','md','sm','xs');
+		$allowed_keys = array('lg', 'md', 'sm', 'xs');
 		$diff = array_diff($allowed_keys, array_keys($cols));
-		if(!empty($diff)) {
+		if (!empty($diff)) {
 			throw new Exception("BootstrapOptionsetField::setColumns must be passed an array with keys " . implode(', ', $allowed_keys));
 		}
 
@@ -68,7 +72,7 @@ class BootstrapOptionsetField extends BootstrapFormField {
 
 		$maxSpan = max(array_values($this->columnCounts));
 		$minSpan = min(array_values($this->columnCounts));
-		$this->numberOfColumns = ceil($maxSpan/$minSpan);
+		$this->numberOfColumns = ceil($maxSpan / $minSpan);
 
 		return $this->owner;
 	}
@@ -101,7 +105,7 @@ class BootstrapOptionsetField extends BootstrapFormField {
 	 */
 	public function ColumnClasses() {
 		$classes = array();
-		foreach($this->columnCounts as $colName => $val) {
+		foreach ($this->columnCounts as $colName => $val) {
 			$classes[] = "col-{$colName}-{$val}";
 		}
 
@@ -114,8 +118,8 @@ class BootstrapOptionsetField extends BootstrapFormField {
 	 *
 	 * @return  int
 	 */
-	public function PerColumn() {		
-		return ceil(count($this->owner->getSource())/$this->numberOfColumns);
+	public function PerColumn() {
+		return ceil(count($this->owner->getSource()) / $this->numberOfColumns);
 	}
 
 

@@ -20,11 +20,9 @@ class BootstrapFormField extends DataExtension {
 		"form-group"
 	);
 
-	protected $labelClasses = array(
-	);
+	protected $labelClasses = array();
 
-	protected $inputClasses = array(
-	);
+	protected $inputClasses = array();
 
 
 	/**
@@ -34,7 +32,7 @@ class BootstrapFormField extends DataExtension {
 	 * @return BootstrapFormField
 	 */
 	public function addPlaceholder($text) {
-		return $this->owner->setAttribute("placeholder",$text);
+		return $this->owner->setAttribute("placeholder", $text);
 	}
 
 
@@ -47,9 +45,9 @@ class BootstrapFormField extends DataExtension {
 	 */
 	public function addHelpText($text) {
 		$this->owner->HelpText = $text;
+
 		return $this->owner;
 	}
-
 
 
 	/**
@@ -61,9 +59,9 @@ class BootstrapFormField extends DataExtension {
 	 */
 	public function addInlineHelpText($text) {
 		$this->owner->InlineHelpText = $text;
+
 		return $this->owner;
 	}
-
 
 
 	/**
@@ -76,9 +74,9 @@ class BootstrapFormField extends DataExtension {
 	 */
 	public function setHolderAttribute($key, $val) {
 		$this->holderAttributes[$key] = $val;
+
 		return $this->owner;
 	}
-
 
 
 	/**
@@ -88,9 +86,10 @@ class BootstrapFormField extends DataExtension {
 	 */
 	public function HolderAttributes() {
 		$ret = "";
-		foreach($this->holderAttributes as $k => $v) {
-			$ret .= "$k=\"".Convert::raw2att($v)."\" ";
+		foreach ($this->holderAttributes as $k => $v) {
+			$ret .= "$k=\"" . Convert::raw2att($v) . "\" ";
 		}
+
 		return $ret;
 	}
 
@@ -103,6 +102,7 @@ class BootstrapFormField extends DataExtension {
 	 */
 	public function addInputClass($class) {
 		$this->inputClasses[] = $class;
+
 		return $this->owner;
 	}
 
@@ -115,10 +115,10 @@ class BootstrapFormField extends DataExtension {
 	public function InputClasses() {
 		$this->loadErrorMessage();
 
-		return implode(" ",$this->inputClasses);
+		return implode(" ", $this->inputClasses);
 	}
 
-		/**
+	/**
 	 * Allows adding custom classes to the label
 	 *
 	 * @param string $class the class
@@ -127,6 +127,7 @@ class BootstrapFormField extends DataExtension {
 	 */
 	public function addLabelClass($class) {
 		$this->labelClasses[] = $class;
+
 		return $this->owner;
 	}
 
@@ -139,7 +140,7 @@ class BootstrapFormField extends DataExtension {
 	public function LabelClasses() {
 		$this->loadErrorMessage();
 
-		return implode(" ",$this->labelClasses);
+		return implode(" ", $this->labelClasses);
 	}
 
 	/**
@@ -151,6 +152,7 @@ class BootstrapFormField extends DataExtension {
 	 */
 	public function addHolderClass($class) {
 		$this->holderClasses[] = $class;
+
 		return $this->owner;
 	}
 
@@ -163,7 +165,7 @@ class BootstrapFormField extends DataExtension {
 	public function HolderClasses() {
 		$this->loadErrorMessage();
 
-		return implode(" ",$this->holderClasses);
+		return implode(" ", $this->holderClasses);
 	}
 
 	/**
@@ -173,7 +175,7 @@ class BootstrapFormField extends DataExtension {
 	 * @todo allow setting error message as inline
 	 */
 	private function loadErrorMessage() {
-		if($this->owner->message) {
+		if ($this->owner->message) {
 			$this->addHolderClass("error");
 			$this->addHelpText($this->owner->message);
 		}

@@ -19,9 +19,9 @@ class BootstrapTextField extends BootstrapFormField {
 	public function prependText($text) {
 		$this->owner->PrependedText = $text;
 		$this->owner->addExtraClass('form-control');
+
 		return $this->owner;
 	}
-
 
 
 	/**
@@ -33,14 +33,14 @@ class BootstrapTextField extends BootstrapFormField {
 	public function appendText($text) {
 		$this->owner->AppendedText = $text;
 		$this->owner->addExtraClass('form-control');
+
 		return $this->owner;
 	}
 
 
-
 	/**
 	 * Sets the width of the text field to a pre-configured size. Options include:
-	 *	- mini
+	 *    - mini
 	 *  - small
 	 *  - medium
 	 *  - large
@@ -52,9 +52,9 @@ class BootstrapTextField extends BootstrapFormField {
 	 */
 	public function setSize($size) {
 		$s = trim(strtolower($size));
+
 		return $this->owner->addExtraClass("input-{$s}");
 	}
-
 
 
 	/**
@@ -65,6 +65,7 @@ class BootstrapTextField extends BootstrapFormField {
 	 */
 	public function setSpan($span) {
 		$s = trim(strtolower($span));
+
 		return $this->owner->addExtraClass("span{$s}");
 	}
 
